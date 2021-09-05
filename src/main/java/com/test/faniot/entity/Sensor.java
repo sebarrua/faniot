@@ -6,18 +6,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Sensor {
 	
 	@Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "SensorId",nullable = false)
+    @Column(name = "sensor_id",nullable = false)
     private Long sensorId;
     
-    @Column(name="Nombre")
+    @Column(name="nombre")
     private String nombre;
 
-    @Column(name="Descripcion")
+    @Column(name="descripcion")
     private String descripcion;
     
     public Sensor() {

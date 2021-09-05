@@ -3,7 +3,9 @@ package com.test.faniot.rest;
 import java.util.List;
 import java.util.Optional;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -17,6 +19,7 @@ import com.test.faniot.entity.Sensor;
 import com.test.faniot.service.SensorService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value="/sensor")
 public class SensorRest {
 	
@@ -27,6 +30,8 @@ public class SensorRest {
 	public List<Sensor> ListSensor (){
 		System.out.println("GET ALL");
 		List<Sensor> listSensor = this.sensorService.getAll();
+		JSONArray jsonA = new JSONArray(listSensor);
+		System.out.println(jsonA);
 		return listSensor;
 	}
 	
@@ -46,11 +51,9 @@ public class SensorRest {
 	}
 	
 	@PatchMapping(value="/{sensorId}")
-	public Optional<Sensor> UpdateSensor (@RequestBody Sensor newSensor, @PathVariable ("sensorId") Long sensorId){
+	public void UpdateSensor (@RequestBody Sensor newSensor, @PathVariable ("sensorId") Long sensorId){
 		System.out.println("UPDATE SENSOR");
 		this.sensorService.update(newSensor, sensorId);
-		Optional<Sensor> thisSensor = this.sensorService.get(newSensor.getSensorId());
-		return thisSensor;
 	}
 	
 	@DeleteMapping(value="/{sensorId}")

@@ -45,7 +45,6 @@ public class SensorService implements IBaseService<Sensor> {
 //		this.sensorRepository.save
 		Optional<Sensor> sensorById = this.get(id);
 		if(sensorById != null) {
-			sensorById.get().setSensorId(sensorById.get().getSensorId());
 			sensorById.get().setNombre(entity.getNombre());
 			sensorById.get().setDescripcion(entity.getDescripcion());
 			this.sensorRepository.flush();
