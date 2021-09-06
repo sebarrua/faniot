@@ -33,11 +33,6 @@ public class MedicionService implements IBaseService<Medicion>{
 	@Override
 	public void save(Medicion entity) {
 		// TODO Auto-generated method stub
-		System.out.println("MEDICION SERVICE");
-		System.out.println(entity);
-		System.out.println(entity.getFecha());
-		System.out.println(entity.getTemperatura());
-		System.out.println(entity.getSensor());
 		Optional<Sensor> sensorSelect = this.sensorService.get(entity.getSensor().getSensorId());
 		entity.setSensor(sensorSelect.get());
 		this.medicionRepository.save(entity);
